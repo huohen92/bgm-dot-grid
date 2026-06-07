@@ -98,6 +98,7 @@ docker run -d \
 | **看一集** | 一键标记下一集未看 |
 | **评分 + 类型** | 显示 Bangumi 评分和风格标签 |
 | **快捷跳转** | 点击海报跳转 Bangumi 详情页 |
+| **长按标题复制** | 长按标题复制标(移动端浏览器中file://协议可能无法使用该功能) |
 
 ### ⚙️ 设置
 
@@ -220,8 +221,8 @@ curl http://你的IP:4500/api/health
 国内访问 Bangumi 图片可能受限，可通过以下方式解决：
 
 - **Docker 版默认**：`/img/` 后端自动拉取 + 磁盘缓存
-- **公共图片反代**：在设置页「图片代理」填入 `https://bgmimg.anibt.net`
-- **修改后端图片源**：`BGM_IMG_DOMAIN=lain.bangumi.one`
+- **公共图片反代**：在设置页「图片代理」填入 `example.com`
+- **修改后端图片源**：`BGM_IMG_DOMAIN=example.com`
 
 ---
 
@@ -287,8 +288,10 @@ PATCH /users/-/collections/{subject_id}
 
 支持任何兼容 Bangumi API v0 规范的端点：
 - `https://api.bgm.tv/v0`（官方）
-- `https://api.bangumi.one/v0`（社区镜像）
 
+---
+- [关于自建 Bangumi API 和图片反代](https://catcat.blog/2026/05/bangumi-reverse-proxy)
+- [相关Github项目](https://github.com/Yuri-NagaSaki/bangumi-proxy)
 ---
 
 ## 📄 许可
