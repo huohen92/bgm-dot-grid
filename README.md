@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="https://s41.ax1x.com/2026/06/03/pmVJa4g.png" alt="BGM点格子" width="120" />
+  <img src="https://raw.githubusercontent.com/huohen92/bgm-dot-grid/main/img/bgm-dot-grid-logo.png" alt="BGM点格子" width="120" />
 </p>
 
 <h1 align="center">bgm-dot-grid · BGM 点格子</h1>
@@ -11,7 +11,7 @@
 <p align="center">
   <img src="https://img.shields.io/badge/版本-v1.8.9-f09199" alt="版本" />
   <img src="https://img.shields.io/badge/license-MIT-blue" alt="License" />
-  <img src="https://img.shields.io/badge/纯前端-无后端依赖-brightgreen" alt="纯前端" />
+  <a href="https://hub.docker.com/r/huohen92/bgm-dot-grid"><img src="https://img.shields.io/badge/Docker-available-2496ED?logo=docker" alt="Docker" /></a>
 </p>
 
 ---
@@ -31,16 +31,42 @@
 
 ---
 
-## 🚀 快速开始
+## ⚡ 快速开始
 
-### 首次使用
+### 单文件版（开箱即用）
 
-1. 点击右上角 **⚙️** 打开设置
-2. 在 [next.bgm.tv/demo/access-token](https://next.bgm.tv/demo/access-token) 获取你的 Access Token
-3. 粘贴 Token，点击 「🔌 连接」
-4. 等待数据加载完成即可开始使用
+下载 [`1.8.9.html`](./1.8.9.html)，浏览器打开，填入 Access Token 即可。
 
-> 💡 **Token 仅存储在浏览器本地 localStorage 中**，不会上传到任何第三方服务器。
+> 在 [next.bgm.tv/demo/access-token](https://next.bgm.tv/demo/access-token) 获取 Token
+
+### Docker 版（推荐服务器/NAS部署）
+
+```bash
+docker run -d \
+  --name bgm-dot-grid \
+  --restart unless-stopped \
+  -p 4500:3000 \
+  huohen92/bgm-dot-grid:v1.9.0
+```
+
+打开 `http://你的IP:4500` 即可使用。详情见下方 [Docker 版说明](#-docker-版说明)。
+
+---
+
+## 🖼️ 界面预览
+
+<p align="center">
+  <strong>移动端</strong><br />
+  <img src="https://raw.githubusercontent.com/huohen92/bgm-dot-grid/main/img/bgm-dot-grid-Mobile-1.png" alt="移动端主页" width="300" />
+  <img src="https://raw.githubusercontent.com/huohen92/bgm-dot-grid/main/img/bgm-dot-grid-Mobile-2.png" alt="移动端二级页面" width="300" />
+</p>
+
+<p align="center">
+  <strong>PC 端</strong><br />
+  <img src="https://raw.githubusercontent.com/huohen92/bgm-dot-grid/main/img/bgm-dot-grid-PC-1.png" alt="PC端主页" width="600" />
+  <br />
+  <img src="https://raw.githubusercontent.com/huohen92/bgm-dot-grid/main/img/bgm-dot-grid-PC-2.png" alt="PC端二级页面" width="600" />
+</p>
 
 ---
 
@@ -56,6 +82,7 @@
 | **搜索** | 实时按标题搜索过滤 |
 | **统计栏** | 顶部显示各分类条目数量 + 总体进度条 |
 | **排序** | 默认 / 更新时间 / 评分 / 进度 / 标签 五种排序 |
+| **右键快捷** | 右键卡片快速标记下一集（PC 端） |
 | **加载条** | 顶部细条显示 API 请求状态 |
 
 ### 🎬 二级页面（剧集详情）
@@ -67,7 +94,7 @@
 | **剧集网格** | 显示该作品的所有剧集 |
 | **观看状态** | 粉色 = 已看，灰色 = 未来播出，绿色（7天内）= 未看最新集 |
 | **快速标记** | 点击任意集 → 菜单：「看过」「看到这里」「撤销」 |
-| **状态切换** | 想看/看过/在看/搁置/抛弃 一键切换 |
+| **状态切换** | 想看 / 看过 / 在看 / 搁置 / 抛弃 一键切换 |
 | **看一集** | 一键标记下一集未看 |
 | **评分 + 类型** | 显示 Bangumi 评分和风格标签 |
 | **快捷跳转** | 点击海报跳转 Bangumi 详情页 |
@@ -77,9 +104,9 @@
 | 设置项 | 默认 | 说明 |
 |--------|------|------|
 | **Access Token** | — | Bangumi API 认证 |
-| **API 端点** | `https://api.bgm.tv/v0` | 支持自定义 |
+| **API 端点** | `https://api.bgm.tv/v0` | 支持自定义，Docker 版默认 `/v0` 走本地代理 |
+| **图片代理** | 留空 | 解决封面图加载问题 |
 | **Bangumi 主站** | `https://bgm.tv` | 跳转详情页时使用 |
-| **图片代理前缀** | 留空 | 解决封面图跨域问题 |
 | **显示状态标签** | 开启 | 卡片左上角的「在看」「想看」等 |
 | **显示更新时间** | 开启 | 在播番封面显示「周X」 |
 | **显示评分** | 关闭 | 封面右下角显示 ⭐ 评分 |
@@ -87,127 +114,168 @@
 
 ---
 
-## 🖼️ 界面预览
+## 🏗️ 版本说明
 
-<p align="center">
-  <strong>移动端</strong><br />
-  <img src="https://s41.ax1x.com/2026/06/07/pmmijV1.png" alt="移动端主页" width="300" />
-  <img src="https://s41.ax1x.com/2026/06/07/pmmiLr9.png" alt="移动端二级页面" width="300" />
-</p>
+本项目提供两个版本，满足不同使用场景。
 
-<p align="center">
-  <strong>PC 端</strong><br />
-  <img src="https://s41.ax1x.com/2026/06/07/pmmivUx.png" alt="PC端主页" width="600" />
-  <br />
-  <img src="https://s41.ax1x.com/2026/06/07/pmmiObR.png" alt="PC端二级页面" width="600" />
-</p>
+### 版本对比
+
+| 特性 | 单文件版（纯前端） | Docker 版（前后端） |
+|---|---|---|
+| **部署方式** | 浏览器直接打开 HTML | Docker 容器运行 |
+| **后端** | 无，浏览器直连 Bangumi API | Node.js (Express) 反向代理 |
+| **API 请求** | 浏览器 → 远端 API 直连 | 浏览器 → 本地后端 → 远端 API |
+| **图片加载** | 浏览器直连官方图片源 | 后端拉取 + **磁盘缓存** (TTL 1h) |
+| **跨域问题** | 需 API 端点支持 CORS | 同域请求，无跨域问题 |
+| **图片代理** | 设置页手动填写公共反代地址 | 默认可配置 `/img/` 走本地缓存 |
+| **IP 限制** | 无 | 支持 ALLOWED_IPS 白名单 |
+| **资源占用** | 0（浏览器即可） | ~50MB 内存 |
+| **适用场景** | 个人电脑临时使用 | 服务器 / NAS 长期部署 |
+
+### 选型建议
+
+- **单文件版**：适合在自己电脑上临时使用，双击 HTML 即可，不依赖任何服务端
+- **Docker 版**：适合部署到 NAS 或 VPS，图片缓存可大幅提升加载速度，多人共享访问也更安全
+
+---
+
+## 🐳 Docker 版说明
+
+适合部署到 VPS、NAS 或任何支持 Docker 的设备。
+
+### Docker Hub
+
+镜像地址：[huohen92/bgm-dot-grid](https://hub.docker.com/r/huohen92/bgm-dot-grid)
+
+### Docker Compose（推荐）
+
+```yaml
+version: '3.8'
+services:
+  bgm-dot-grid:
+    image: huohen92/bgm-dot-grid:v1.9.0
+    container_name: bgm-dot-grid
+    restart: unless-stopped
+    ports:
+      - "4500:3000"
+    environment:
+      - API_BASE=/v0
+      - IMAGE_PROXY_PREFIX=/img/
+      - BGM_SITE=https://bgm.tv
+      - BGM_IMG_DOMAIN=lain.bgm.tv
+      - INBUILT_TOKEN=
+      - ALLOWED_IPS=
+    volumes:
+      - ./image_cache:/app/image_cache
+```
+
+```bash
+docker compose up -d
+```
+
+### 环境变量
+
+| 变量 | 功能 | 默认值 |
+|---|---|---|
+| `API_BASE` | API 端点。`/v0` 走本地后端代理，也支持 `https://api.bgm.tv/v0` 直连官方 | `/v0` |
+| `IMAGE_PROXY_PREFIX` | 图片代理。`/img/` 走本地缓存 + 磁盘缓存，留空直连原图，或填公共反代地址 | `/img/` |
+| `BGM_SITE` | Bangumi 主站，跳转海报/评论区用 | `https://bgm.tv` |
+| `BGM_IMG_DOMAIN` | 后端拉取原图的域名。国内封锁环境可改为 `lain.bangumi.one` | `lain.bgm.tv` |
+| `INBUILT_TOKEN` | 内置 Token，预设到设置页。留空让用户自己填 | 空 |
+| `ALLOWED_IPS` | IP 白名单，逗号分隔。`local`=仅内网，`192.168.*.*`=限定网段，留空=不限制 | 空 |
+
+### 图片缓存
+
+后端自动缓存图片到 `./image_cache`（TTL 1 小时）。手动清理：
+
+```bash
+curl -X POST http://你的IP:4500/api/clear-image-cache
+```
+
+### 更新
+
+```bash
+docker compose pull && docker compose up -d
+```
+
+### 本地构建
+
+```bash
+git clone https://github.com/huohen92/bgm-dot-grid.git
+cd bgm-dot-grid
+docker compose up -d --build
+```
+
+### 健康检查
+
+```bash
+curl http://你的IP:4500/api/health
+# → {"status":"ok","uptime":12345}
+```
+
+---
+
+## 🖼️ 图片代理说明
+
+国内访问 Bangumi 图片可能受限，可通过以下方式解决：
+
+- **Docker 版默认**：`/img/` 后端自动拉取 + 磁盘缓存
+- **公共图片反代**：在设置页「图片代理」填入 `https://bgmimg.anibt.net`
+- **修改后端图片源**：`BGM_IMG_DOMAIN=lain.bangumi.one`
 
 ---
 
 ## 🔗 API 请求说明
 
-应用完全基于 Bangumi API v0，以下是所有请求的完整说明。
+应用完全基于 Bangumi API v0。
 
 ### 首页加载
-
-打开页面时自动发起（阻塞）：
 
 ```
 GET /me
 ```
-- **用途**：验证 Access Token 有效性，获取当前用户信息
-- **触发时机**：连接 Token 时 / 页面刷新自动登录
+- **用途**：验证 Token，获取用户信息
 - **频率**：每次页面加载 1 次
-- **返回**：用户 ID、昵称、头像
 
 ```
 GET /users/{uid}/collections?subject_type=2&type=3&limit=50
 ```
 - **用途**：获取「在看」分类的收藏列表
-- **触发时机**：登录成功后
-- **频率**：每次页面加载 1 次（多页则 50 条/页依次请求）
-- **返回**：条目列表（含评分、标签、集数进度）
-- **备注**：type=3 表示「在看」
+- **频率**：每次页面加载 1 次
 
 ### 切换分类
-
-点击筛选栏按钮时发起：
 
 ```
 GET /users/{uid}/collections?subject_type=2&type={typeCode}&limit=50&offset={offset}
 ```
-- **用途**：切换或首次加载某一分类的条目
 - **typeCode**：1想看 / 2看过 / 3在看 / 4搁置 / 5抛弃
-- **触发时机**：点击分类按钮且该分类未加载过
-- **备注**：每页 50 条，返回后立即**增量渲染**到页面，非串行等待
 
 ### 后台预加载
 
-登录成功后自动在后台发起（不阻塞操作）：
-
 ```
 GET /users/-/collections/{subject_id}/episodes?limit=500
 ```
-- **用途**：批量获取一部作品的所有剧集列表 + 每集观看状态
-- **触发时机**：登录后对每部「在看」作品逐个请求（并发 3 个）
-- **频率**：每部「在看」作品 1 次，仅首次登录时
-- **返回**：剧集列表（含 id、sort、airdate）+ 每集是否已看（type=2）
-- **备注**：这是最重要的优化请求——同时拿了列表和状态
-
-### 打开二级页面
-
-点击卡片时发起：
-
-```
-GET /users/-/collections/{subject_id}/episodes?limit=500
-```
-- **用途**：获取该作品的剧集列表 + 观看状态
-- **触发时机**：点击卡片打开详情
-- **备注**：如果后台预加载已完成，则**零请求**直接使用缓存
+- 登录后对每部「在看」作品并发预加载剧集列表 + 观看状态
+- 打开二级页面时，预加载过的作品**零请求**直接使用缓存
 
 ### 标记单集
-
-点击「看过」「看到这里」「撤销」时发起：
 
 ```
 PUT /users/-/collections/-/episodes/{episode_id}
 ```
-- **Body**：`{"type": 2}`（看过）或 `{"type": 0}`（撤销）
-- **触发时机**：点击任意操作菜单项
-- **频率**：每次标记 1 次请求
+- `{"type": 2}` = 看过，`{"type": 0}` = 撤销
 
-当标记后满足条件（如看完所有集）时，额外发起：
+看完所有集时自动更新条目状态：
 
 ```
 PATCH /users/-/collections/{subject_id}
 ```
-- **Body**：`{"type": {statusCode}}`
-- **用途**：自动变更条目收藏状态（如在看 → 看过）
-- **触发时机**：看完最后 1 集时
-
-### 同步
-
-点击「↻ 同步」按钮时发起：
-
-对当前分类重新拉取全量数据，流程同首页加载 + 切换分类。
-
-### 全局设置保存
-
-点击「💾 保存」时：
-
-```
-HEAD {apiEndpoint}
-```
-- **用途**：可选，通过 Ping 按钮测试端点连通性
-- **触发时机**：手动点击 📡 按钮
 
 ---
 
 ## 🔧 自定义指南
 
 ### 修改主题色
-
-在 CSS `:root` 中修改 `--primary` 变量即可全局更换主题色：
 
 ```css
 :root {
@@ -217,7 +285,7 @@ HEAD {apiEndpoint}
 
 ### 添加自定义 API 端点
 
-在设置页面的「网络」区域修改，支持任何兼容 Bangumi API v0 规范的端点，如：
+支持任何兼容 Bangumi API v0 规范的端点：
 - `https://api.bgm.tv/v0`（官方）
 - `https://api.bangumi.one/v0`（社区镜像）
 
