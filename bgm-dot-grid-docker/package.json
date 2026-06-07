@@ -1,0 +1,13 @@
+{
+  "name": "bgm-dot-grid",
+  "version": "1.9.0",
+  "description": "BGM点格子 - 图片缓存后端 + 直连API前端",
+  "main": "index.js",
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "axios": "^1.6.2"
+  }
+}
